@@ -7,7 +7,6 @@ require_relative 'js_generator/view_file'
 require 'active_support/inflector'
 
 module JsGenerator
-  class Error < StandardError; end
   class SetupJs
     attr_reader :namespace, :model_name, :action_name
 
