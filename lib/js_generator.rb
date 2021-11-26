@@ -2,6 +2,7 @@
 
 require_relative "js_generator/version"
 require_relative 'js_generator/js_for_view'
+require_relative 'js_generator/app_js'
 require 'active_support/inflector'
 
 module JsGenerator
