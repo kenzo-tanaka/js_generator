@@ -25,6 +25,27 @@ RSpec.describe JsGenerator::AppJs do
       end
     end
 
+    context 'without namespace arg' do
+      before { File.open(app_js_path, 'w') }
+      after { File.delete(app_js_path) }
+
+      let(:text) do
+        <<~TEXT
+          window.Example.Blogs = window.Example.Blogs || {};
+          import BlogsNew from './views/blogs/new';
+          window.Example.Blogs.New = window.Example.Blogs.New || {};
+          window.Example.Blogs.New = BlogsNew;
+        TEXT
+      end
+
+      it 'append some js lines to application.js' do
+        setup_js = JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new')
+        app_js = JsGenerator::AppJs.new(setup_js)
+        app_js.append_script
+        expect(File.read(app_js_path)).to include text
+      end
+    end
+
     context 'already exists namespace in application.js' do
       before { File.open(app_js_path, 'w') { |f| f.write original_text } }
       after { File.delete(app_js_path) }
@@ -60,6 +81,5 @@ RSpec.describe JsGenerator::AppJs do
         expect(File.read(app_js_path)).to eq expect_text
       end
     end
-
   end
 end

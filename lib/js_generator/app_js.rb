@@ -1,5 +1,7 @@
 require 'dotenv'
 Dotenv.load
+require_relative './syntax_builder/namespaced'
+require_relative './syntax_builder/without_namespace'
 
 module JsGenerator
   class AppJs
@@ -16,8 +18,9 @@ module JsGenerator
       File.open(file_path, 'a') { |f| f << script_for_append }
     end
 
+    # TODO: refactor namespace.present?
     def action_namespace
-      "window.#{top_level_js_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
+      syntax_builder.action_namespace
     end
 
     private
@@ -26,9 +29,13 @@ module JsGenerator
       "app/javascript/packs/application.js"
     end
 
+    def syntax_builder
+      namespace.present? ? SyntaxBuilder::Namespaced.new(self) : SyntaxBuilder::WithoutNamespaced.new(self)
+    end
+
     def script_for_append
       <<~TEXT
-        #{define_namespace(custom_namespace)}
+        #{define_namespace(custom_namespace) if namespace.present?}
         #{define_namespace(model_namespace)}
         import #{import_name} from '#{import_path}';
         #{action_namespace} = #{action_namespace} || {};
@@ -45,15 +52,15 @@ module JsGenerator
     end
 
     def model_namespace
-      "window.#{top_level_js_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}"
+      syntax_builder.model_namespace
     end
 
     def import_path
-      "./views/#{namespace}/#{model_name.pluralize}/#{action_name}"
+      syntax_builder.import_path
     end
 
     def import_name
-      "#{namespace.capitalize}#{model_name.capitalize.pluralize}#{action_name.capitalize}"
+      syntax_builder.import_name
     end
   end
 end
