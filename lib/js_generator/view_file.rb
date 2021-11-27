@@ -15,7 +15,7 @@ module JsGenerator
     private
 
     def file_path
-      "tmp/app/views/#{namespace}/#{model_name.pluralize}/#{action_name}.html.erb"
+      "app/views/#{namespace}/#{model_name.pluralize}/#{action_name}.html.erb"
     end
 
     def script_tag

@@ -2,7 +2,7 @@
 
 RSpec.describe JsGenerator::JsForView do
   describe 'create_file' do
-    let(:path) { 'tmp/app/javascript/packs/views/admin/blogs/index.js' }
+    let(:path) { 'app/javascript/packs/views/admin/blogs/index.js' }
     after { File.delete(path) }
 
     it 'create js file for view' do

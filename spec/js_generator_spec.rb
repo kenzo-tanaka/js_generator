@@ -6,7 +6,8 @@ RSpec.describe JsGenerator do
   end
 
   describe JsGenerator::SetupJs do
-    let(:js_path) { "tmp/app/javascript/packs/views/admin/blogs/new.js" }
+    before { JsGenerator::AppJs.top_level_namespace = 'Example' }
+    let(:js_path) { "app/javascript/packs/views/admin/blogs/new.js" }
     after { File.delete(js_path) }
     it 'create js file for view' do
       setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')

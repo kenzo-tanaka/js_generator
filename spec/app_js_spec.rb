@@ -3,7 +3,7 @@
 RSpec.describe JsGenerator::AppJs do
   before { JsGenerator::AppJs.top_level_namespace = 'Example' }
   describe 'append_script' do
-    let(:app_js_path) { "tmp/app/javascript/packs/application.js" }
+    let(:app_js_path) { "app/javascript/packs/application.js" }
 
     context 'not exist namespace in application.js' do
       before { File.open(app_js_path, 'w') }

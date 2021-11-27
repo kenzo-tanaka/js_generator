@@ -25,7 +25,7 @@ module JsGenerator
     private
 
     def file_path
-      "tmp/app/javascript/packs/application.js"
+      "app/javascript/packs/application.js"
     end
 
     def script_for_append

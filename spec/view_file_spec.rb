@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe JsGenerator::ViewFile do
+  before { JsGenerator::AppJs.top_level_namespace = 'Example' }
   describe 'append_script' do
-    let(:view_path) { "tmp/app/views/admin/blogs/new.html.erb" }
+    let(:view_path) { "app/views/admin/blogs/new.html.erb" }
     before { File.open(view_path, 'w') }
     after { File.delete(view_path) }
 

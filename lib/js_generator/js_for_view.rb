@@ -34,11 +34,11 @@ module JsGenerator
     end
 
     def view_path
-      "tmp/app/javascript/packs/views"
+      "app/javascript/packs/views"
     end
 
     def namespace_path
-      "tmp/app/javascript/packs/views/#{namespace}"
+      "app/javascript/packs/views/#{namespace}"
     end
 
     def model_path
