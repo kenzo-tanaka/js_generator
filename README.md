@@ -26,8 +26,7 @@ TOP_LEVEL_JS_NAMESPACE=Example
 ```
 
 ```shell
-$ bundle exec setup_js admin blog new
-# bundle exec setup_js [namespace] [model_name] [action_name]
+$ bundle exec setup_js admin/blogs/new 
 ```
 
 This command generates these lines:

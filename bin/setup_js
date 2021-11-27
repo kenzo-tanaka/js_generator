@@ -1,8 +1,16 @@
 #!/usr/bin/env ruby
 require_relative '../lib/js_generator'
-if ARGV.length < 3
-  raise ArgumentError.new("wrong number of arguments (given #{ARGV.length}, expected 3)")
+if ARGV.length != 1
+  raise ArgumentError.new("wrong number of arguments (given #{ARGV.length}, expected 1)")
 end
 
-setup_js = JsGenerator::SetupJs.new(namespace: ARGV[0], model_name: ARGV[1], action_name: ARGV[2])
-setup_js.run
+args = ARGV[0].split('/')
+
+if args.length == 2
+  setup_js = JsGenerator::SetupJs.new(model_name: args[0], action_name: args[1])
+  setup_js.run
+else
+  setup_js = JsGenerator::SetupJs.new(namespace: args[0], model_name: args[1], action_name: args[2])
+  setup_js.run
+end
+
