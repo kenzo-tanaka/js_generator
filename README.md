@@ -18,7 +18,15 @@ Or install it yourself as:
 
     $ gem install js_generator
 
-## Usage
+Add this lines to `config/environments/development.rb`:
+
+```ruby
+config.after_initialize do
+  JsGenerator::AppJs.top_level_namespace = 'MySuperApp' # set your js top namespace
+end
+```
+
+## Development
 
 ```shell
 $ bin/setup
