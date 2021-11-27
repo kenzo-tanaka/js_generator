@@ -33,5 +33,24 @@ RSpec.describe JsGenerator do
       end
     end
 
+    context 'without namespace arg' do
+      let(:js_path) { "app/javascript/packs/views/blogs/new.js" }
+      after { File.delete(js_path) }
+
+      let(:app_js_path) { "app/javascript/packs/application.js" }
+      before { File.open(app_js_path, 'w') }
+      after { File.delete(app_js_path) }
+
+      let(:view_path) { "app/views/blogs/new.html.erb" }
+      before { File.open(view_path, 'w') }
+      after { File.delete(view_path) }
+
+      it 'create js file for view' do
+        setup_js = JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new')
+        setup_js.run
+        expect(File.exist?(js_path)).to eq true
+      end
+    end
+
   end
 end
