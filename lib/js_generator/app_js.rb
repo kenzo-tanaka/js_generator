@@ -1,7 +1,10 @@
 module JsGenerator
   class AppJs
-    # TODO: enable to setting
-    TOP_LEVEL_NAMESPACE = 'Example'.freeze
+    @@top_level_namespace
+
+    def self.top_level_namespace=(value)
+      @@top_level_namespace = value
+    end
 
     attr_reader :namespace, :model_name, :action_name
 
@@ -16,7 +19,7 @@ module JsGenerator
     end
 
     def action_namespace
-      "window.#{TOP_LEVEL_NAMESPACE}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
+      "window.#{@@top_level_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
     end
 
     private
@@ -40,11 +43,11 @@ module JsGenerator
     end
 
     def custom_namespace
-      "window.#{TOP_LEVEL_NAMESPACE}.#{namespace.capitalize}"
+      "window.#{@@top_level_namespace}.#{namespace.capitalize}"
     end
 
     def model_namespace
-      "window.#{TOP_LEVEL_NAMESPACE}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}"
+      "window.#{@@top_level_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}"
     end
 
     def import_path

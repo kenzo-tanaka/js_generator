@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe JsGenerator::AppJs do
+  before { JsGenerator::AppJs.top_level_namespace = 'Example' }
   describe 'append_script' do
     let(:app_js_path) { "tmp/app/javascript/packs/application.js" }
 
