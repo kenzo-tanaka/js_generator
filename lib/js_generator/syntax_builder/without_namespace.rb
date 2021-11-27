@@ -1,18 +1,22 @@
+require_relative './syntax_builder_base'
+
 module JsGenerator
   module SyntaxBuilder
-    class WithoutNamespaced
-      attr_reader :namespace, :model_name, :action_name, :top_level_js_namespace
-
-      def initialize(app_js)
-        @namespace = app_js.namespace
-        @model_name = app_js.model_name
-        @action_name = app_js.action_name
-        @top_level_js_namespace = app_js.top_level_js_namespace
-      end
-
+    class WithoutNamespaced < SyntaxBuilderBase
       def action_namespace
         "window.#{top_level_js_namespace}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
       end
+
+      def script_for_append
+        <<~TEXT
+          #{define_namespace(model_namespace)}
+          import #{import_name} from '#{import_path}';
+          #{action_namespace} = #{action_namespace} || {};
+          #{action_namespace} = #{import_name};
+        TEXT
+      end
+
+      private
 
       def model_namespace
         "window.#{top_level_js_namespace}.#{model_name.capitalize.pluralize}"

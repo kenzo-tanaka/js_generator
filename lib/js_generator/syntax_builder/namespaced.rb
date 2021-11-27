@@ -1,17 +1,26 @@
+require_relative './syntax_builder_base'
+
 module JsGenerator
   module SyntaxBuilder
-    class Namespaced
-      attr_reader :namespace, :model_name, :action_name, :top_level_js_namespace
-
-      def initialize(app_js)
-        @namespace = app_js.namespace
-        @model_name = app_js.model_name
-        @action_name = app_js.action_name
-        @top_level_js_namespace = app_js.top_level_js_namespace
-      end
-
+    class Namespaced < SyntaxBuilderBase
       def action_namespace
         "window.#{top_level_js_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
+      end
+
+      def script_for_append
+        <<~TEXT
+          #{define_namespace(custom_namespace)}
+          #{define_namespace(model_namespace)}
+          import #{import_name} from '#{import_path}';
+          #{action_namespace} = #{action_namespace} || {};
+          #{action_namespace} = #{import_name};
+        TEXT
+      end
+
+      private
+
+      def custom_namespace
+        "window.#{top_level_js_namespace}.#{namespace.capitalize}"
       end
 
       def model_namespace
