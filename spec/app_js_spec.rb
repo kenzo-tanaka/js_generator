@@ -18,8 +18,9 @@ RSpec.describe JsGenerator::AppJs do
         TEXT
       end
       it 'append some js lines to application.js' do
-        setup_js = JsGenerator::AppJs.new('admin', 'blog', 'new')
-        setup_js.append_script
+        setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+        app_js = JsGenerator::AppJs.new(setup_js)
+        app_js.append_script
         expect(File.read(app_js_path)).to include text
       end
     end
@@ -53,8 +54,9 @@ RSpec.describe JsGenerator::AppJs do
       end
 
       it 'does not overwrite namespace, append script' do
-        setup_js = JsGenerator::AppJs.new('admin', 'blog', 'new')
-        setup_js.append_script
+        setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+        app_js = JsGenerator::AppJs.new(setup_js)
+        app_js.append_script
         expect(File.read(app_js_path)).to eq expect_text
       end
     end

@@ -2,10 +2,10 @@ module JsGenerator
   class JsForView
     attr_reader :namespace, :model_name, :action_name
 
-    def initialize(namespace, model_name, action_name)
-      @namespace = namespace
-      @model_name = model_name
-      @action_name = action_name
+    def initialize(setup_js)
+      @namespace = setup_js.namespace
+      @model_name = setup_js.model_name
+      @action_name = setup_js.action_name
     end
 
     def create_file
