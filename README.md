@@ -2,7 +2,11 @@
 
 This gem generates some JavaScript code with the specific rule.
 
-## Installation
+## 📌 Dependency
+
+- [dotenv](https://github.com/bkeepers/dotenv)
+
+## 📚 How to work
 
 Add this line to your application's Gemfile:
 
@@ -18,7 +22,7 @@ Add this lines to `.env`:
 
 ```text
 # set your js top namespace
-TOP_LEVEL_JS_NAMESPACE=MySuperApp
+TOP_LEVEL_JS_NAMESPACE=Example
 ```
 
 ```shell
@@ -45,7 +49,7 @@ This command generates these lines:
     </script>
     ```
 
-## Development
+## 🖥 Development
 
 ```shell
 $ bin/setup
