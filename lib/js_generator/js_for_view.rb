@@ -22,7 +22,10 @@ module JsGenerator
     end
 
     def make_namespace_dir
-      Dir.mkdir(namespace_path) unless Dir.exist?(namespace_path)
+      return if Dir.exist?(namespace_path)
+      return if namespace.nil?
+
+      Dir.mkdir(namespace_path)
     end
 
     def make_model_dir

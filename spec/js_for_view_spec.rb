@@ -2,14 +2,29 @@
 
 RSpec.describe JsGenerator::JsForView do
   describe 'create_file' do
-    let(:path) { 'app/javascript/packs/views/admin/blogs/new.js' }
-    after { File.delete(path) }
 
-    it 'create js file for view' do
-      setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
-      js_for_view = JsGenerator::JsForView.new(setup_js)
-      js_for_view.create_file
-      expect(File.exist?(path)).to eq true
+    context 'with namespace' do
+      let(:path) { 'app/javascript/packs/views/admin/blogs/new.js' }
+      after { File.delete(path) }
+
+      it 'create js file for view' do
+        setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
+        js_for_view = JsGenerator::JsForView.new(setup_js)
+        js_for_view.create_file
+        expect(File.exist?(path)).to eq true
+      end
+    end
+
+    context 'without namespace' do
+      let(:path) { 'app/javascript/packs/views/blogs/new.js' }
+      after { File.delete(path) }
+
+      it 'create js file for view' do
+        setup_js = JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new')
+        js_for_view = JsGenerator::JsForView.new(setup_js)
+        js_for_view.create_file
+        expect(File.exist?(path)).to eq true
+      end
     end
   end
 end
