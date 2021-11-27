@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    js_generator (0.1.0)
+    js_generator (0.1.1)
       dotenv (~> 2.7.6)
 
 GEM
