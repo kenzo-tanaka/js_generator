@@ -10,15 +10,19 @@ module JsGenerator
   class Error < StandardError; end
   class SetupJs
     attr_reader :namespace, :model_name, :action_name
+    attr_accessor :top_level_js_namespace
 
     def initialize(namespace, model_name, action_name)
       @namespace = namespace
       @model_name = model_name
       @action_name = action_name
+      @top_level_js_namespace = ENV['TOP_LEVEL_JS_NAMESPACE']
     end
 
     def run
-      raise Error.new('Please set TOP_LEVEL_JS_NAMESPACE in .env') if AppJs.top_level_namespace.nil?
+      if top_level_js_namespace.nil?
+        raise Error.new('Please set TOP_LEVEL_JS_NAMESPACE in .env')
+      end
 
       JsForView.new(self).create_file
       AppJs.new(self).append_script

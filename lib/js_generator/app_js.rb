@@ -3,18 +3,13 @@ Dotenv.load
 
 module JsGenerator
   class AppJs
-    @@top_level_namespace = ENV['TOP_LEVEL_JS_NAMESPACE']
-
-    def self.top_level_namespace
-      @@top_level_namespace
-    end
-
-    attr_reader :namespace, :model_name, :action_name
+    attr_reader :namespace, :model_name, :action_name, :top_level_js_namespace
 
     def initialize(setup_js)
       @namespace = setup_js.namespace
       @model_name = setup_js.model_name
       @action_name = setup_js.action_name
+      @top_level_js_namespace = setup_js.top_level_js_namespace
     end
 
     def append_script
@@ -22,7 +17,7 @@ module JsGenerator
     end
 
     def action_namespace
-      "window.#{@@top_level_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
+      "window.#{top_level_js_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
     end
 
     private
@@ -46,11 +41,11 @@ module JsGenerator
     end
 
     def custom_namespace
-      "window.#{@@top_level_namespace}.#{namespace.capitalize}"
+      "window.#{top_level_js_namespace}.#{namespace.capitalize}"
     end
 
     def model_namespace
-      "window.#{@@top_level_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}"
+      "window.#{top_level_js_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}"
     end
 
     def import_path

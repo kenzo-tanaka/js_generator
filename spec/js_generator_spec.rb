@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe JsGenerator do
-  it "has a version number" do
+  it 'has a version number' do
     expect(JsGenerator::VERSION).not_to be nil
   end
 
   describe JsGenerator::SetupJs do
     context 'top level namespace not set' do
-      xit 'raise error' do
+      it 'raise error' do
         setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+        setup_js.top_level_js_namespace = nil
         expect{ setup_js.run }.to raise_error(JsGenerator::Error)
       end
     end
