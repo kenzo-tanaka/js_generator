@@ -13,6 +13,10 @@ RSpec.describe JsGenerator do
     before { File.open(app_js_path, 'w') }
     after { File.delete(app_js_path) }
 
+    let(:view_path) { "app/views/admin/blogs/new.html.erb" }
+    before { File.open(view_path, 'w') }
+    after { File.delete(view_path) }
+
     after { File.delete(js_path) }
     it 'create js file for view' do
       setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')

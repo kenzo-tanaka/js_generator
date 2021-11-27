@@ -20,5 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```shell
+$ bin/setup
+```
 
+```shell
+$ rspec
+```
