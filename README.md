@@ -2,11 +2,11 @@
 
 This gem generates some JavaScript code with the specific rule.
 
-## 📌 Dependency
+# 📌 Dependency
 
 - [dotenv](https://github.com/bkeepers/dotenv)
 
-## 📚 How to work
+# 📚 How to work
 
 Add this line to your application's Gemfile:
 
@@ -26,7 +26,7 @@ TOP_LEVEL_JS_NAMESPACE=Example
 ```
 
 ```shell
-$ bundle exec setup_js admin/blogs/new 
+$ bundle exec js_generate admin/blogs/new 
 ```
 
 This command generates these lines:
@@ -41,14 +41,28 @@ This command generates these lines:
     window.Example.Admin.Blogs.New = window.Example.Admin.Blogs.New || {};
     window.Example.Admin.Blogs.New = AdminBlogsNew;
     ```
-- Write `script` tag to the view file.
+- Write `script` tag to the view file(e.g. `app/views/admin/blogs/new.html.erb`).
     ```html
     <script>
       window.Example.Admin.Blogs.New();
     </script>
     ```
 
-## 🖥 Development
+# 🔍 `js_generate` command
+
+Here is the `js_generate` syntax. The `namespace` is optional.
+
+```shell
+$ bundle exec js_generate [namespace(optional)]/[model_name]/[action_name]
+
+# e.g. with namespace
+$ bundle exec js_generate admin/blogs/new
+
+# e.g.g without namespace
+$ bundle exec js_generate blogs/index 
+```
+
+# 🖥 Development
 
 ```shell
 $ bin/setup
