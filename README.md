@@ -25,6 +25,8 @@ Add this lines to `.env`:
 TOP_LEVEL_JS_NAMESPACE=Example
 ```
 
+Run the command like this:
+
 ```shell
 $ bundle exec js_generate admin/blogs/new 
 ```
