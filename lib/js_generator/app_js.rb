@@ -1,9 +1,13 @@
 module JsGenerator
   class AppJs
-    @@top_level_namespace
+    @@top_level_namespace = nil
 
     def self.top_level_namespace=(value)
       @@top_level_namespace = value
+    end
+
+    def self.top_level_namespace
+      @@top_level_namespace
     end
 
     attr_reader :namespace, :model_name, :action_name

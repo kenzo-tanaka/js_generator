@@ -7,6 +7,7 @@ require_relative 'js_generator/view_file'
 require 'active_support/inflector'
 
 module JsGenerator
+  class Error < StandardError; end
   class SetupJs
     attr_reader :namespace, :model_name, :action_name
 
@@ -17,6 +18,8 @@ module JsGenerator
     end
 
     def run
+      raise Error.new('AppJs.top_level_namespace is not set') if AppJs.top_level_namespace.nil?
+
       JsForView.new(namespace, model_name, action_name).create_file
       AppJs.new(namespace, model_name, action_name).append_script
       ViewFile.new(namespace, model_name, action_name).append_script

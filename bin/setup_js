@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 require_relative '../lib/js_generator'
-JsGenerator::AppJs.top_level_namespace = 'Example'
 setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
 setup_js.run
