@@ -33,7 +33,9 @@ module JsGenerator
     end
 
     def touch_file
-      File.open(action_path, 'w') unless File.exist?(action_path)
+      return if File.exist?(action_path)
+
+      File.open(action_path, 'w') { |f| f.write export_statement }
     end
 
     def view_path
@@ -50,6 +52,12 @@ module JsGenerator
 
     def action_path
       "#{model_path}/#{action_name}.js"
+    end
+
+    def export_statement
+      <<~TEXT
+        export default() => {}
+      TEXT
     end
   end
 end
