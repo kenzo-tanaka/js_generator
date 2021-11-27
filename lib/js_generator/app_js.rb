@@ -1,10 +1,9 @@
+require 'dotenv'
+Dotenv.load
+
 module JsGenerator
   class AppJs
-    @@top_level_namespace = nil
-
-    def self.top_level_namespace=(value)
-      @@top_level_namespace = value
-    end
+    @@top_level_namespace = ENV['TOP_LEVEL_JS_NAMESPACE']
 
     def self.top_level_namespace
       @@top_level_namespace

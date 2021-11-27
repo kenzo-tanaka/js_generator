@@ -18,7 +18,7 @@ module JsGenerator
     end
 
     def run
-      raise Error.new('AppJs.top_level_namespace is not set') if AppJs.top_level_namespace.nil?
+      raise Error.new('Please set TOP_LEVEL_JS_NAMESPACE in .env') if AppJs.top_level_namespace.nil?
 
       JsForView.new(namespace, model_name, action_name).create_file
       AppJs.new(namespace, model_name, action_name).append_script
