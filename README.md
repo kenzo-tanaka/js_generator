@@ -25,5 +25,5 @@ $ bin/setup
 ```
 
 ```shell
-$ rspec
+$ bundle exec rspec
 ```

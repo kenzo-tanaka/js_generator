@@ -13,6 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/kenzo-tanaka/js_generator"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"
+  spec.executables   = ['setup_js']
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/kenzo-tanaka/js_generator"
