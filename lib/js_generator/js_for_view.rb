@@ -9,23 +9,23 @@ module JsGenerator
     end
 
     def create_file
-      mkdir_view
-      mkdir_namespace
-      mkdir_model
+      make_view_dir
+      make_namespace_dir
+      make_model_dir
       touch_file
     end
 
     private
 
-    def mkdir_view
+    def make_view_dir
       Dir.mkdir(view_path) unless Dir.exist?(view_path)
     end
 
-    def mkdir_namespace
+    def make_namespace_dir
       Dir.mkdir(namespace_path) unless Dir.exist?(namespace_path)
     end
 
-    def mkdir_model
+    def make_model_dir
       Dir.mkdir(model_path) unless Dir.exist?(model_path)
     end
 
@@ -38,7 +38,7 @@ module JsGenerator
     end
 
     def namespace_path
-      "app/javascript/packs/views/#{namespace}"
+      "#{view_path}/#{namespace}"
     end
 
     def model_path
