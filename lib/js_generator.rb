@@ -12,7 +12,7 @@ module JsGenerator
     attr_reader :namespace, :model_name, :action_name
     attr_accessor :top_level_js_namespace
 
-    def initialize(namespace, model_name, action_name)
+    def initialize(namespace:, model_name:, action_name:)
       @namespace = namespace
       @model_name = model_name
       @action_name = action_name

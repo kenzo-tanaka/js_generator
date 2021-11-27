@@ -4,5 +4,5 @@ if ARGV.length < 3
   raise ArgumentError.new("wrong number of arguments (given #{ARGV.length}, expected 3)")
 end
 
-setup_js = JsGenerator::SetupJs.new(ARGV[0], ARGV[1], ARGV[2])
+setup_js = JsGenerator::SetupJs.new(namespace: ARGV[0], model_name: ARGV[1], action_name: ARGV[2])
 setup_js.run

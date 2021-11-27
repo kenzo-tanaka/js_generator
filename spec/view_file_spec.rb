@@ -15,7 +15,7 @@ RSpec.describe JsGenerator::ViewFile do
     end
 
     it 'append script tag to view file' do
-      setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+      setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
       view_file = JsGenerator::ViewFile.new(setup_js)
       view_file.append_script
       expect(File.read(view_path)).to include text

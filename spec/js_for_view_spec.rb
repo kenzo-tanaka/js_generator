@@ -6,7 +6,7 @@ RSpec.describe JsGenerator::JsForView do
     after { File.delete(path) }
 
     it 'create js file for view' do
-      setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+      setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
       js_for_view = JsGenerator::JsForView.new(setup_js)
       js_for_view.create_file
       expect(File.exist?(path)).to eq true

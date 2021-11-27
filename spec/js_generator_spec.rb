@@ -8,7 +8,7 @@ RSpec.describe JsGenerator do
   describe JsGenerator::SetupJs do
     context 'top level namespace not set' do
       it 'raise error' do
-        setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+        setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
         setup_js.top_level_js_namespace = nil
         expect{ setup_js.run }.to raise_error(JsGenerator::Error)
       end
@@ -27,7 +27,7 @@ RSpec.describe JsGenerator do
       after { File.delete(view_path) }
 
       it 'create js file for view' do
-        setup_js = JsGenerator::SetupJs.new('admin', 'blog', 'new')
+        setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
         setup_js.run
         expect(File.exist?(js_path)).to eq true
       end
