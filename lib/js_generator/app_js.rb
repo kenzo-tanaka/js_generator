@@ -12,11 +12,17 @@ module JsGenerator
     end
 
     def append_script
-      File.open("app/javascript/packs/application.js", 'a') do |f|
+      File.open(file_path, 'a') do |f|
         f << syntax_builder.script_for_append
       end
 
-      puts '✍️ Appended script to application.js'
+      puts "📝️ Appended script to #{file_path}"
+    end
+
+    private
+
+    def file_path
+      "app/javascript/packs/application.js"
     end
   end
 end
