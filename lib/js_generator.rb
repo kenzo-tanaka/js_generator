@@ -25,8 +25,18 @@ module JsGenerator
       end
 
       JsForView.new(self).create_file
-      AppJs.new(self).append_script
-      ViewFile.new(self).append_script
+      AppJs.new(syntax_builder).append_script
+      ViewFile.new(self, syntax_builder).append_script
+    end
+
+    private
+
+    def syntax_builder
+      if namespace.present?
+        SyntaxBuilder::WithNamespace.new(self)
+      else
+        SyntaxBuilder::WithoutNamespaced.new(self)
+      end
     end
   end
 end

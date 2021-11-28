@@ -1,12 +1,12 @@
 module JsGenerator
   class ViewFile
-    attr_reader :namespace, :model_name, :action_name, :setup_js
+    attr_reader :namespace, :model_name, :action_name, :syntax_builder
 
-    def initialize(setup_js)
+    def initialize(setup_js, syntax_builder)
       @namespace = setup_js.namespace
       @model_name = setup_js.model_name
       @action_name = setup_js.action_name
-      @setup_js = setup_js
+      @syntax_builder = syntax_builder
     end
 
     def append_script
@@ -22,7 +22,7 @@ module JsGenerator
     def script_tag
       <<~TEXT
         <script>
-          #{AppJs.new(setup_js).action_namespace}();
+          #{syntax_builder.action_namespace}();
         </script>
       TEXT
     end
