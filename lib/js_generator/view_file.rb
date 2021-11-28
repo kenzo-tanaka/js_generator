@@ -9,7 +9,7 @@ module JsGenerator
       @syntax_builder = syntax_builder
     end
 
-    def append_script
+    def append_script_tag
       File.open(file_path, 'a') { |f| f << script_tag }
     end
 

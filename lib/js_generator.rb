@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "js_generator/version"
+require 'active_support/core_ext/module/delegation'
+require_relative 'js_generator/version'
 require_relative 'js_generator/js_for_view'
 require_relative 'js_generator/app_js'
 require_relative 'js_generator/view_file'
@@ -24,12 +25,28 @@ module JsGenerator
         raise Error.new('Please set TOP_LEVEL_JS_NAMESPACE in .env')
       end
 
-      JsForView.new(self).create_file
-      AppJs.new(syntax_builder).append_script
-      ViewFile.new(self, syntax_builder).append_script
+      create_file
+      append_script
+      append_script_tag
     end
 
+    delegate :create_file, to: :js_for_view
+    delegate :append_script, to: :app_js
+    delegate :append_script_tag, to: :view_file
+
     private
+
+    def js_for_view
+      JsForView.new(self)
+    end
+
+    def app_js
+      AppJs.new(syntax_builder)
+    end
+
+    def view_file
+      ViewFile.new(self, syntax_builder)
+    end
 
     def syntax_builder
       if namespace.present?
