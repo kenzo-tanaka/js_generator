@@ -11,6 +11,8 @@ module JsGenerator
 
     def append_script_tag
       File.open(file_path, 'a') { |f| f << script_tag }
+
+      puts "📝 Appended <script> tag to #{file_path}"
     end
 
     private

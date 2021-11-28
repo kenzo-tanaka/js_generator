@@ -13,6 +13,8 @@ module JsGenerator
       make_namespace_dir
       make_model_dir
       touch_file
+
+      puts "📂 Created #{action_path}"
     end
 
     private

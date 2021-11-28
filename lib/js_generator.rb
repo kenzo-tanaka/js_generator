@@ -28,6 +28,8 @@ module JsGenerator
       create_file
       append_script
       append_script_tag
+
+      puts "✨ All done!"
     end
 
     delegate :create_file, to: :js_for_view
