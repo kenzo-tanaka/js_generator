@@ -1,6 +1,6 @@
 require 'dotenv'
 Dotenv.load
-require_relative './syntax_builder/namespaced'
+require_relative './syntax_builder/with_namespace'
 require_relative './syntax_builder/without_namespace'
 
 module JsGenerator
@@ -28,7 +28,7 @@ module JsGenerator
 
     def syntax_builder
       if namespace.present?
-        SyntaxBuilder::Namespaced.new(self)
+        SyntaxBuilder::WithNamespace.new(self)
       else
         SyntaxBuilder::WithoutNamespaced.new(self)
       end

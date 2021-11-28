@@ -2,7 +2,7 @@ require_relative './syntax_builder_base'
 
 module JsGenerator
   module SyntaxBuilder
-    class Namespaced < SyntaxBuilderBase
+    class WithNamespace < SyntaxBuilderBase
       def action_namespace
         "window.#{top_level_js_namespace}.#{namespace.capitalize}.#{model_name.capitalize.pluralize}.#{action_name.capitalize}"
       end
