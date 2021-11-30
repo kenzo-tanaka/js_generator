@@ -60,7 +60,7 @@ $ bundle exec js_generate [namespace(optional)]/[model_name]/[action_name]
 # e.g. with namespace
 $ bundle exec js_generate admin/blogs/new
 
-# e.g.g without namespace
+# e.g. without namespace
 $ bundle exec js_generate blogs/index 
 ```
 
