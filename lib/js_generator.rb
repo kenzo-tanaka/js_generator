@@ -54,7 +54,7 @@ module JsGenerator
       if namespace.present?
         SyntaxBuilder::WithNamespace.new(self)
       else
-        SyntaxBuilder::WithoutNamespaced.new(self)
+        SyntaxBuilder::WithoutNamespace.new(self)
       end
     end
   end

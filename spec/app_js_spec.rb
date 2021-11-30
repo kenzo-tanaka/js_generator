@@ -41,7 +41,7 @@ RSpec.describe JsGenerator::AppJs do
       end
 
       let(:setup_js) { JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new') }
-      let(:builder) { JsGenerator::SyntaxBuilder::WithoutNamespaced.new(setup_js) }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithoutNamespace.new(setup_js) }
       let(:app_js) { JsGenerator::AppJs.new(builder) }
 
       it 'append some js lines to application.js' do

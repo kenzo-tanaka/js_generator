@@ -29,7 +29,7 @@ RSpec.describe JsGenerator::ViewFile do
     context 'without namespace' do
       let(:view_path) { "app/views/blogs/new.html.erb" }
       let(:setup_js) { JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new') }
-      let(:builder) { JsGenerator::SyntaxBuilder::WithoutNamespaced.new(setup_js) }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithoutNamespace.new(setup_js) }
       let(:view_file) { JsGenerator::ViewFile.new(setup_js, builder) }
 
       before { File.open(view_path, 'w') }
