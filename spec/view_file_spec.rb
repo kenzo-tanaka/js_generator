@@ -5,6 +5,10 @@ RSpec.describe JsGenerator::ViewFile do
 
     context 'with namespace' do
       let(:view_path) { "app/views/admin/blogs/new.html.erb" }
+      let(:setup_js) { JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new') }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithNamespace.new(setup_js) }
+      let(:view_file) { JsGenerator::ViewFile.new(setup_js, builder) }
+
       before { File.open(view_path, 'w') }
       after { File.delete(view_path) }
 
@@ -17,9 +21,6 @@ RSpec.describe JsGenerator::ViewFile do
       end
 
       it 'append script tag to view file' do
-        setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
-        with_namespace_builder = JsGenerator::SyntaxBuilder::WithNamespace.new(setup_js)
-        view_file = JsGenerator::ViewFile.new(setup_js, with_namespace_builder)
         view_file.append_script_tag
         expect(File.read(view_path)).to include text
       end
@@ -27,6 +28,10 @@ RSpec.describe JsGenerator::ViewFile do
 
     context 'without namespace' do
       let(:view_path) { "app/views/blogs/new.html.erb" }
+      let(:setup_js) { JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new') }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithoutNamespaced.new(setup_js) }
+      let(:view_file) { JsGenerator::ViewFile.new(setup_js, builder) }
+
       before { File.open(view_path, 'w') }
       after { File.delete(view_path) }
 
@@ -39,10 +44,6 @@ RSpec.describe JsGenerator::ViewFile do
       end
 
       it 'append script tag to view file' do
-        setup_js = JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new')
-        without_namespace_builder = JsGenerator::SyntaxBuilder::WithoutNamespaced.new(setup_js)
-
-        view_file = JsGenerator::ViewFile.new(setup_js, without_namespace_builder)
         view_file.append_script_tag
         expect(File.read(view_path)).to include text
       end

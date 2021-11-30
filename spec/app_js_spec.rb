@@ -17,11 +17,11 @@ RSpec.describe JsGenerator::AppJs do
           window.Example.Admin.Blogs.New = AdminBlogsNew;
         TEXT
       end
-      it 'append some js lines to application.js' do
-        setup_js = JsGenerator::SetupJs.new(namespace: 'admin',model_name: 'blog', action_name: 'new')
-        with_namespace_builder = JsGenerator::SyntaxBuilder::WithNamespace.new(setup_js)
+      let(:setup_js) { JsGenerator::SetupJs.new(namespace: 'admin',model_name: 'blog', action_name: 'new') }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithNamespace.new(setup_js) }
+      let(:app_js) { JsGenerator::AppJs.new(builder) }
 
-        app_js = JsGenerator::AppJs.new(with_namespace_builder)
+      it 'append some js lines to application.js' do
         app_js.append_script
         expect(File.read(app_js_path)).to include text
       end
@@ -40,11 +40,11 @@ RSpec.describe JsGenerator::AppJs do
         TEXT
       end
 
-      it 'append some js lines to application.js' do
-        setup_js = JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new')
-        without_namespace_builder = JsGenerator::SyntaxBuilder::WithoutNamespaced.new(setup_js)
+      let(:setup_js) { JsGenerator::SetupJs.new(model_name: 'blog', action_name: 'new') }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithoutNamespaced.new(setup_js) }
+      let(:app_js) { JsGenerator::AppJs.new(builder) }
 
-        app_js = JsGenerator::AppJs.new(without_namespace_builder)
+      it 'append some js lines to application.js' do
         app_js.append_script
         expect(File.read(app_js_path)).to include text
       end
@@ -78,11 +78,11 @@ RSpec.describe JsGenerator::AppJs do
         TEXT
       end
 
-      it 'does not overwrite namespace, append script' do
-        setup_js = JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new')
-        with_namespace_builder = JsGenerator::SyntaxBuilder::WithNamespace.new(setup_js)
+      let(:setup_js) { JsGenerator::SetupJs.new(namespace: 'admin', model_name: 'blog', action_name: 'new') }
+      let(:builder) { JsGenerator::SyntaxBuilder::WithNamespace.new(setup_js) }
+      let(:app_js) { JsGenerator::AppJs.new(builder) }
 
-        app_js = JsGenerator::AppJs.new(with_namespace_builder)
+      it 'does not overwrite namespace, append script' do
         app_js.append_script
         expect(File.read(app_js_path)).to eq expect_text
       end
